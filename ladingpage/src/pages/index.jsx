@@ -1,7 +1,5 @@
-import React from 'react';
-import styles from '../styles/Home.module.css';
-//header
-import Header from "../components/Header";
+import Header from "../components/header";//header
+import styles from "./Home.module.scss";
 export default function Home() {
   return(
     <div className={styles.container}>
