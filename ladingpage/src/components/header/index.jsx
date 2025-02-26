@@ -17,8 +17,9 @@ const Header=() =>{
             <Link href="/">...</Link>
         </div>
         <div className={Styles.search}></div>
-        <div className={Styles.action}></div>
-            <button>Fale conosco</button>
+        <div className={Styles.action}>
+            <button className={Styles.button}>Fale conosco</button>
+        </div>
     </div>
     );           
 };

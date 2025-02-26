@@ -1,15 +1,25 @@
+//@import "/ladingpage/src/styles/mixins/colors.scss";
 .container {
     padding: 20px 180px;
     width: 100%;
     background-color: #1ea1c9;
-    border-bottom: 1px solid #bee3ee;
+    border-bottom: 1px solid #bee3ee;//azul-claro-color
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .menu{
+    font-size: 18px;
     a+a{
         margin-left: 38.9px;
+       
     }
     
+}
+.button{
+    padding: 15px 50px;
+    border-radius: 8px;
+    background-color: #bee3ee;
+    font-weight: bold;
+    font-size: 15px;
 }
