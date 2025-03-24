@@ -1,0 +1,9 @@
+@import "/styles/mixins/color.scss";
+.button {
+    padding: 10px 30px; /* Ajustei o padding do botão */
+    border-radius: 8px;
+    background-color: #bee3ee;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+}

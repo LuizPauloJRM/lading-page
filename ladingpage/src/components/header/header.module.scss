@@ -1,25 +1,24 @@
 //@import "/ladingpage/src/styles/mixins/colors.scss";
 .container {
-    padding: 20px 180px;
+    padding: 20px 20px; /* Reduzi o padding horizontal */
+    max-width: 1200px; /* Define uma largura máxima para o container */
+    margin: 0 auto; /* Centraliza o container */
     width: 100%;
     background-color: #1ea1c9;
-    border-bottom: 1px solid #bee3ee;//azul-claro-color
+    border-bottom: 0.5px solid #bee3ee; // azul-claro-color
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.menu{
+
+.menu {
     font-size: 18px;
-    a+a{
-        margin-left: 38.9px;
-       
+    a + a {
+        margin-left: 20px; /* Ajustei o espaçamento entre os links */
     }
-    
 }
-.button{
-    padding: 15px 50px;
-    border-radius: 8px;
-    background-color: #bee3ee;
-    font-weight: bold;
-    font-size: 15px;
+
+.action {
+    text-align: end;
 }
+
