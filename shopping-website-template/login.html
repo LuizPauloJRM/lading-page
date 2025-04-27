@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Certifique-se de que o caminho do CSS está correto -->
+</head>
+
+<body>
+    <div id="loginContainer">
+        <!-- Logo do site -->
+        <div class="logo">
+            <img src="img/logocamisastore.png" alt="Logo do Site">
+            <!-- Substitua "img/logo.png" pelo caminho correto da sua logo -->
+        </div>
+
+        <!-- Formulário de login -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha"
+                    required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        alert('Rota não encontrada. Verifique se o backend está rodando e a URL está correta.');
+                    } else {
+                        throw new Error('Erro ao realizar o login. Verifique suas credenciais.');
+                    }
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    sessionStorage.setItem('authenticated', 'true'); // Marca o usuário como autenticado
+                    alert(data.message);
+                    window.location.href = "index.html"; // Redireciona para a página principal
+                } else {
+                    alert(data.message); // Exibe mensagem de erro
+                }
+            } catch (error) {
+                console.error('Erro ao conectar ao servidor:', error);
+                alert('Erro ao conectar ao servidor. Tente novamente mais tarde.');
+            }
+        });
+    </script>
+</body>
+
+</html>
