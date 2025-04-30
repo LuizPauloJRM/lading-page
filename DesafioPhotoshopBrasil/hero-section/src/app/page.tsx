@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Gmailpng from "../assets/Gmail.png";
 import CardImage1 from "../assets/slide1.jpg"; // Substitua pelo caminho real da imagem
@@ -6,51 +9,88 @@ import CardImage3 from "../assets/slide3.jpg"; // Substitua pelo caminho real da
 import { FaInstagram } from "react-icons/fa"; // Importa o ícone do Instagram
 
 export default function Home() {
+  const [isLogin, setIsLogin] = useState(true); // Alterna entre Login e Cadastro
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "", // Apenas para cadastro
+  });
+
+  // Função para lidar com mudanças nos campos do formulário
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Função para lidar com o envio do formulário
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isLogin) {
+      // Lógica de login
+      console.log("Login:", formData);
+    } else {
+      // Lógica de cadastro
+      if (formData.password !== formData.confirmPassword) {
+        alert("As senhas não coincidem!");
+        return;
+      }
+      console.log("Cadastro:", formData);
+    }
+  };
+
   return (
     <main>
       <section className="relative w-full h-screen flex flex-col bg-stone-300 items-center justify-between">
-        {/* Caixa de Login */}
+        {/* Caixa de Login/Cadastro */}
         <div className="absolute top-20 right-4 md:right-8 bg-white p-4 md:p-6 rounded-lg shadow-lg w-72 md:w-80">
-          <h2 className="text-gray-800 text-lg md:text-xl font-bold mb-4">Login</h2>
-          <form className="flex flex-col space-y-4">
+          <h2 className="text-gray-800 text-lg md:text-xl font-bold mb-4">
+            {isLogin ? "Login" : "Cadastro"}
+          </h2>
+          <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
             <input
               type="email"
+              name="email"
               placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
               className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <input
               type="password"
+              name="password"
               placeholder="Senha"
+              value={formData.password}
+              onChange={handleChange}
               className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
-            <div className="flex items-center justify-between">
-              <label className="flex items-center space-x-2">
-                <input type="checkbox" className="form-checkbox text-green-500" />
-                <span className="text-gray-600 text-sm">Lembrar-me</span>
-              </label>
-              <a href="#forgot-password" className="text-sm text-green-500 hover:underline">
-                Esqueceu a senha?
-              </a>
-            </div>
+            {!isLogin && (
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirme a Senha"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            )}
             <button
               type="submit"
               className="bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
             >
-              Entrar
+              {isLogin ? "Entrar" : "Cadastrar"}
             </button>
           </form>
           <div className="mt-4 text-center">
-            <button
-              className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition flex items-center justify-center space-x-2"
-            >
-              <Image
-                src={Gmailpng}
-                alt="Gmail Logo"
-                width={20}
-                height={20}
-              />
-              <span>Logar com Gmail</span>
-            </button>
+            <p className="text-sm text-gray-600">
+              {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}{" "}
+              <button
+                type="button"
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-green-500 hover:underline"
+              >
+                {isLogin ? "Cadastre-se" : "Faça login"}
+              </button>
+            </p>
           </div>
         </div>
 
