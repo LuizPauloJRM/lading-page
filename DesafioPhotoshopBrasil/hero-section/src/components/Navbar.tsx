@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Regras from './../app/regras/page';
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -28,7 +29,7 @@ export default function Navbar() {
                 </li>
                 <li>
                     <a
-                        href="#rankings"
+                        href="/rankings"
                         className="text-gray-800 hover:text-green-500 font-medium"
                     >
                         Rankings
@@ -36,7 +37,7 @@ export default function Navbar() {
                 </li>
                 <li>
                     <a
-                        href="#regras"
+                        href="/regras"
                         className="text-gray-800 hover:text-green-500 font-medium"
                     >
                         Regras
